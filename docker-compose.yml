@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  autodev-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - AUTODEV_MIN_COMPLEXITY=1
+      - AUTODEV_MAX_COMPLEXITY=5
+      - AUTODEV_MAX_RETRIES=3
+      - AUTODEV_MIN_COVERAGE=85
+      - AUTODEV_RUN_LINT=true
+      - AUTODEV_RUN_TYPECHECK=false
+      - AUTODEV_RUN_COVERAGE=true
+      - AUTODEV_STRICT_VALIDATION=true
+      - AUTODEV_LOCK_STALE_SECONDS=3600
+      - AUTODEV_AUTO_GIT=false
+      - AUTODEV_AUTO_PR=false
+    volumes:
+      - ./logs:/app/logs
+      - ./state:/app/state
+      - ./generated_projects:/app/generated_projects
+    ports:
+      - "8000:8000"  # For future API endpoint
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "from app.health import HealthChecker; from app.config import AgentConfig; from pathlib import Path; c = AgentConfig(); h = HealthChecker(c.memory_db_path, c.workspace_root); s = h.check(); exit(0 if s.status != 'unhealthy' else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

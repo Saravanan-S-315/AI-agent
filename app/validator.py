@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 from .models import ValidationResult
@@ -28,15 +29,15 @@ class Validator:
 
         checks["syntax"] = self._run_command(["python", "-m", "compileall", "app"], project_root, logs)
         if run_lint:
-            checks["lint"] = self._run_command(["flake8", "app", "tests"], project_root, logs)
+            checks["lint"] = self._run_command([sys.executable, "-m", "flake8", "app", "tests"], project_root, logs)
         if run_coverage:
             checks["coverage"] = self._run_command(
-                ["pytest", "-q", "--cov=app", f"--cov-fail-under={min_coverage}"], project_root, logs
+                [sys.executable, "-m", "pytest", "-q", "--cov=app", f"--cov-fail-under={min_coverage}"], project_root, logs
             )
         else:
-            checks["tests"] = self._run_command(["pytest", "-q"], project_root, logs)
+            checks["tests"] = self._run_command([sys.executable, "-m", "pytest", "-q"], project_root, logs)
         if run_type_check:
-            checks["typecheck"] = self._run_command(["mypy", "app"], project_root, logs)
+            checks["typecheck"] = self._run_command([sys.executable, "-m", "mypy", "app"], project_root, logs)
 
         success = all(checks.values())
         if not strict_validation and "lint" in checks and not checks["lint"]:

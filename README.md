@@ -25,6 +25,57 @@ pytest -q
 python main.py
 ```
 
+## CLI Agent Usage
+
+Use the agent in terminal in either command mode or natural-language prompt mode:
+
+```bash
+# Interactive prompt mode (type plain-English tasks)
+python main.py cli --mode prompt
+
+# Interactive raw-command mode (type shell commands directly)
+python main.py cli --mode cmd
+
+# Interactive without confirmation prompts
+python main.py cli --yes
+
+# One shell command
+python main.py shell "dir"
+
+# One natural-language task
+python main.py prompt "run tests"
+
+# Original project-generation cycle
+python main.py run
+
+# With git publishing (requires configured git remotes)
+python main.py run --auto-git
+# With PR creation (requires AUTODEV_GITHUB_REPO + GITHUB_TOKEN)
+python main.py run --auto-git --auto-pr
+
+# Utility commands
+python main.py health
+python main.py history --limit 20
+
+# Enable LLM planning for arbitrary prompts
+# (set OPENAI_API_KEY and optional AUTODEV_LLM_MODEL)
+python main.py prompt "create text document in desktop" --llm-model gpt-4o-mini
+```
+
+In `cli` mode:
+- In `--mode prompt`, type plain-English tasks (example: `search for scheduler`).
+- In `--mode cmd`, type raw shell commands.
+- `:run` executes one AutoDev orchestration cycle.
+- `--auto-git`/`--auto-pr` flags on `cli` apply to `:run`.
+- `:health` shows health checks.
+- `:history [n]` shows recent commands.
+- `:mode prompt|cmd` switches interpretation mode.
+- `:safe on|off` toggles destructive command blocking.
+- `:dry on|off` toggles dry-run mode.
+- LLM planning is on by default in prompt/cli; use `--no-llm` to disable.
+- `:help` shows help.
+- `:exit` quits.
+
 ## Environment Configuration
 
 - `AUTODEV_MAX_RETRIES` (default: `3`)

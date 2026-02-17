@@ -1,4 +1,44 @@
-pytest
-pytest-cov
-flake8
-mypy
+# Core dependencies
+# (Add your AI/LLM dependencies here - e.g., openai, anthropic, etc.)
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-timeout>=2.1.0
+
+# Code quality
+flake8>=6.0.0
+mypy>=1.4.1
+black>=23.7.0
+isort>=5.12.0
+
+# Logging and monitoring
+python-json-logger>=2.0.7
+
+# Database
+# sqlite3 is a built-in Python module, no need to install it
+
+# API and web
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# Git operations
+GitPython>=3.1.32
+
+# Utilities
+python-dotenv>=1.0.0
+click>=8.1.7
+
+# Production server (optional)
+gunicorn>=21.2.0
+
+# Security
+cryptography>=41.0.0
+
+# LLM planning (optional)
+openai>=1.12.0
+
+# Documentation
+mkdocs>=1.5.0
+mkdocs-material>=9.1.0
