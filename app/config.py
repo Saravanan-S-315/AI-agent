@@ -25,6 +25,9 @@ class AgentConfig:
     strict_validation: bool = True
     schedule_lock_file: Path = Path("state/scheduler.lock")
     lock_stale_seconds: int = 3600
+    auto_git: bool = False
+    auto_pr: bool = False
+    github_repo: str = ""
 
     @classmethod
     def from_env(cls) -> "AgentConfig":
@@ -39,6 +42,9 @@ class AgentConfig:
             run_coverage=os.getenv("AUTODEV_RUN_COVERAGE", "true").lower() == "true",
             strict_validation=os.getenv("AUTODEV_STRICT_VALIDATION", "true").lower() == "true",
             lock_stale_seconds=int(os.getenv("AUTODEV_LOCK_STALE_SECONDS", "3600")),
+            auto_git=os.getenv("AUTODEV_AUTO_GIT", "false").lower() == "true",
+            auto_pr=os.getenv("AUTODEV_AUTO_PR", "false").lower() == "true",
+            github_repo=os.getenv("AUTODEV_GITHUB_REPO", ""),
         )
 
     def ensure_dirs(self) -> None:

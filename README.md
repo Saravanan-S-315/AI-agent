@@ -2,17 +2,18 @@
 
 AutoDev Agent is an autonomous software engineering pipeline that turns product goals into validated pull requests using a disciplined branch-first workflow.
 
-## Current Production-Ready Baseline
+## Production-Ready Capabilities in This Repository
 
-This repository now provides a hardened baseline suitable for production iteration:
-
-- Scheduler lock with stale-lock recovery
-- Deterministic idea generation with duplicate avoidance
-- Architecture planning with modular constraints
-- SQLite memory for project and run history
-- Validation pipeline with syntax, lint, coverage, and optional type checks
-- Retry loop with deterministic correction hook and per-attempt validation logs
-- CI quality gates (lint + coverage threshold + mypy)
+- Scheduled single-run orchestration with stale lock recovery
+- Unique project idea generation with SQLite-backed memory
+- Architecture planning with configurable constraints
+- Deterministic modular code scaffolding engine
+- Validation pipeline (syntax, lint, test coverage, optional type-checking)
+- Deterministic correction engine for failed validation attempts
+- Security policy scanner for generated source files
+- Optional git automation (feature branch + conventional commit)
+- Optional GitHub PR creation via API token
+- CI quality gates (flake8 + pytest coverage + mypy)
 
 ## Quickstart
 
@@ -24,7 +25,7 @@ pytest -q
 python main.py
 ```
 
-## Configuration (Environment Variables)
+## Environment Configuration
 
 - `AUTODEV_MAX_RETRIES` (default: `3`)
 - `AUTODEV_MIN_COVERAGE` (default: `85`)
@@ -33,16 +34,26 @@ python main.py
 - `AUTODEV_RUN_COVERAGE` (`true`/`false`)
 - `AUTODEV_STRICT_VALIDATION` (`true`/`false`)
 - `AUTODEV_LOCK_STALE_SECONDS` (default: `3600`)
+- `AUTODEV_AUTO_GIT` (`true`/`false`)
+- `AUTODEV_AUTO_PR` (`true`/`false`)
+- `AUTODEV_GITHUB_REPO` (e.g. `owner/repo`)
+- `GITHUB_TOKEN` (required when `AUTODEV_AUTO_PR=true`)
+
+## Execution Flow
+
+1. Acquire scheduler lock
+2. Generate new project idea
+3. Build architecture plan
+4. Scaffold modular project files
+5. Run security scan
+6. Run validation checks
+7. Apply correction strategy and retry on failure
+8. Persist run history and release lock
+9. Optionally commit on feature branch and open PR
 
 ## Repository Layout
 
 - `app/` core modules
 - `tests/` unit tests
 - `main.py` one-shot runner
-
-## Next milestones
-
-- Integrate LLM-backed code generation adapters
-- Add GitHub API PR creation + merge controller
-- Add security scan stage (e.g., bandit/pip-audit)
-- Add deployment adapters for app/package targets
+- `.github/workflows/ci.yml` CI quality gates
