@@ -37,7 +37,6 @@ def check_files() -> bool:
         ".dockerignore",
         "PRODUCTION_GUIDE.md",
         "DEPLOYMENT_CHECKLIST.md",
-        "PRODUCTION_READY.md",
         "app/logging_config.py",
         "app/health.py",
         "app/backup.py",
@@ -231,3 +230,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+

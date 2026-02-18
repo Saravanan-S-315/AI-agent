@@ -41,4 +41,14 @@ class IdeaGenerator:
                 summary = f"Build {candidate} as a {category.value} project."
                 return ProjectIdea(candidate, category, complexity, summary)
 
-        raise RuntimeError("No unique ideas left in the current template pool.")
+        # Fallback: recycle a template name with a numeric suffix.
+        category = self._rng.choice(list(ProjectCategory))
+        base_name = self._rng.choice(self._TEMPLATES[category])
+        suffix = 2
+        candidate = f"{base_name}-v{suffix}"
+        while candidate in existing_names:
+            suffix += 1
+            candidate = f"{base_name}-v{suffix}"
+        complexity = self._rng.randint(min_complexity, max_complexity)
+        summary = f"Build {candidate} as a {category.value} project."
+        return ProjectIdea(candidate, category, complexity, summary)
