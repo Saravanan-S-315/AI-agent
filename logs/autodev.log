@@ -461,17 +461,3 @@ RuntimeError: No unique ideas left in the current template pool.
 [2026-02-19 00:07:47] autodev.orchestrator - INFO - Changes published successfully
 [2026-02-19 00:07:47] autodev.orchestrator - INFO - Orchestration cycle finished - success=True, duration=11.3s, retries=1
 [2026-02-19 00:07:47] autodev.main - INFO - Orchestration cycle completed successfully
-[2026-02-19 00:14:09] autodev.main - INFO - AutoDev Agent starting...
-[2026-02-19 00:14:09] autodev.main - INFO - Health status: healthy
-[2026-02-19 00:14:09] autodev.orchestrator - INFO - Starting orchestration cycle
-[2026-02-19 00:14:09] autodev.orchestrator - INFO - Generated project idea: inventory-api-v2 (category: rest_apis, complexity: 5)
-[2026-02-19 00:14:09] autodev.orchestrator - INFO - Project scaffolded at: generated_projects\inventory-api-v2
-[2026-02-19 00:14:09] autodev.orchestrator - INFO - Security scan passed
-[2026-02-19 00:14:09] autodev.orchestrator - INFO - Running validation (attempt 1/4)...
-[2026-02-19 00:14:11] autodev.orchestrator - WARNING - Validation failed: {'syntax': True, 'lint': False, 'coverage': True}
-[2026-02-19 00:14:11] autodev.orchestrator - INFO - Applying corrections and retrying...
-[2026-02-19 00:14:11] autodev.orchestrator - INFO - Running validation (attempt 2/4)...
-[2026-02-19 00:14:13] autodev.orchestrator - INFO - Validation passed
-[2026-02-19 00:14:17] autodev.orchestrator - ERROR - Failed to publish changes: GITHUB_TOKEN is not set.
-[2026-02-19 00:14:17] autodev.orchestrator - INFO - Orchestration cycle finished - success=True, duration=8.4s, retries=1
-[2026-02-19 00:14:17] autodev.main - INFO - Orchestration cycle completed successfully
