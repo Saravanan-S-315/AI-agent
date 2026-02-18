@@ -160,6 +160,7 @@ class AutoDevOrchestrator:
         git.commit_project(project_name)
         if not self.config.auto_pr:
             return
+        git.push_branch(branch)
         manager = GitHubManager(self.config.github_repo)
         manager.create_pull_request(
             title=f"feat: add {project_name} with tests and documentation",

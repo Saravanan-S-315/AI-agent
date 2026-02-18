@@ -27,3 +27,6 @@ class GitWorkflow:
         message = f"feat: add {project_name} with tests and documentation"
         subprocess.run(["git", "add", "-A"], cwd=self.repo_root, check=True)
         subprocess.run(["git", "commit", "-m", message], cwd=self.repo_root, check=True)
+
+    def push_branch(self, branch: str, remote: str = "origin") -> None:
+        subprocess.run(["git", "push", "-u", remote, branch], cwd=self.repo_root, check=True)
