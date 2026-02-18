@@ -11,3 +11,4 @@ Traceback (most recent call last):
     raise RuntimeError("No unique ideas left in the current template pool.")
 RuntimeError: No unique ideas left in the current template pool.
 [2026-02-18 21:20:35] autodev.orchestrator - ERROR - Failed to publish changes: HTTP Error 403: Forbidden
+[2026-02-18 21:25:31] autodev.orchestrator - ERROR - Failed to publish changes: HTTP Error 422: Unprocessable Entity
