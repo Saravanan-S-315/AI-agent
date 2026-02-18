@@ -10,3 +10,4 @@ Traceback (most recent call last):
   File "C:\Users\sarav\OneDrive\Documents\AI-agent\app\idea_generator.py", line 44, in generate
     raise RuntimeError("No unique ideas left in the current template pool.")
 RuntimeError: No unique ideas left in the current template pool.
+[2026-02-18 21:20:35] autodev.orchestrator - ERROR - Failed to publish changes: HTTP Error 403: Forbidden
