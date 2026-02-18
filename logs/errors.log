@@ -1,0 +1,12 @@
+[2026-02-18 21:12:52] autodev.orchestrator - ERROR - Failed to publish changes: HTTP Error 403: Forbidden
+[2026-02-18 21:18:37] autodev.orchestrator - ERROR - Unexpected error during orchestration: RuntimeError: No unique ideas left in the current template pool.
+Traceback (most recent call last):
+  File "C:\Users\sarav\OneDrive\Documents\AI-agent\app\orchestrator.py", line 69, in run_once
+    idea = self.idea_generator.generate(
+        existing_names=self.memory.list_project_names(),
+        min_complexity=self.config.min_complexity,
+        max_complexity=self.config.max_complexity,
+    )
+  File "C:\Users\sarav\OneDrive\Documents\AI-agent\app\idea_generator.py", line 44, in generate
+    raise RuntimeError("No unique ideas left in the current template pool.")
+RuntimeError: No unique ideas left in the current template pool.

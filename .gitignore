@@ -4,5 +4,4 @@ state/
 generated_projects/
 .env
 .env.*
-.env
-.env.*
+
