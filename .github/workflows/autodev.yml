@@ -1,0 +1,64 @@
+name: AutoDev Contributions
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: autodev-contributions
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  autodev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate required secrets
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "${OPENAI_API_KEY}" ]; then
+            echo "OPENAI_API_KEY secret is required" >&2
+            exit 1
+          fi
+
+      - name: Health check
+        run: python main.py health
+
+      - name: Run autonomous cycle with retry
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_PAT || github.token }}
+          AUTODEV_GITHUB_REPO: ${{ github.repository }}
+        run: |
+          attempt=1
+          until [ "${attempt}" -gt 3 ]; do
+            echo "AutoDev run attempt ${attempt}/3"
+            if python main.py run --auto-git --auto-pr; then
+              exit 0
+            fi
+            attempt=$((attempt + 1))
+            sleep 15
+          done
+          echo "AutoDev failed after 3 attempts" >&2
+          exit 1

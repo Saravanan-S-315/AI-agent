@@ -77,6 +77,33 @@ For LLM planning in `prompt` and `cli` modes:
 - `PRODUCTION_GUIDE.md` for deployment and operations
 - `DEPLOYMENT_CHECKLIST.md` for pre/post-deploy checks
 
+## Unattended GitHub Contributions
+
+The repository includes `.github/workflows/autodev.yml` to run the agent every 6 hours and on manual dispatch.
+
+Required repository secrets:
+
+- `OPENAI_API_KEY`
+- `GH_TOKEN_PAT` (PAT with `repo` scope for PR creation; workflow falls back to `github.token` if unset)
+
+Recommended branch protection on `main`:
+
+- Require pull requests before merge
+- Require status checks to pass
+- Restrict direct pushes
+
+The workflow runs:
+
+```bash
+python main.py run --auto-git --auto-pr
+```
+
+Safety behavior:
+
+- Includes health check before execution
+- Retries failed runs up to 3 times
+- Skips push/PR when no repository diff exists after staging
+
 ## Repository Layout
 
 - `app/` core modules
