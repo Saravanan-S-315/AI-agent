@@ -61,7 +61,6 @@ class ProjectInfo(BaseModel):
 
 def run_orchestrator_task(config: AgentConfig) -> None:
     """Run orchestrator in background."""
-    global current_run
     try:
         current_run["running"] = True
         logger.info("Starting orchestration from web UI")
@@ -119,7 +118,6 @@ async def get_status() -> StatusResponse:
 @app.post("/api/run")
 async def run_task(request: TaskRequest, background_tasks: BackgroundTasks) -> dict:
     """Start a new orchestration task."""
-    global current_run
 
     if current_run["running"]:
         raise HTTPException(status_code=409, detail="Already running a task")
