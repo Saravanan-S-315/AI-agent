@@ -15,3 +15,4 @@ RuntimeError: No unique ideas left in the current template pool.
 [2026-02-18 21:28:35] autodev.orchestrator - ERROR - Failed to publish changes: HTTP Error 422: Unprocessable Entity
 [2026-02-18 21:30:24] autodev.orchestrator - ERROR - Failed to publish changes: Command '['git', 'push', '-u', 'origin', 'feature/log-summarizer-v5']' returned non-zero exit status 1.
 [2026-02-18 22:33:05] autodev.orchestrator - ERROR - Failed to publish changes: GITHUB_TOKEN is not set.
+[2026-02-18 22:54:20] autodev.orchestrator - ERROR - Failed to publish changes: Target GitHub repository is not configured.
