@@ -2,3 +2,7 @@ __pycache__/
 .pytest_cache/
 state/
 generated_projects/
+.env
+.env.*
+.env
+.env.*
