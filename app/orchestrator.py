@@ -157,7 +157,10 @@ class AutoDevOrchestrator:
         repo_root = Path.cwd()
         git = GitWorkflow(repo_root)
         branch = git.create_or_checkout_feature_branch(project_name)
-        git.commit_project(project_name)
+        committed = git.commit_project(project_name)
+        if not committed:
+            logger.info("No repository changes detected; skipping push and PR creation")
+            return
         if not self.config.auto_pr:
             return
         git.push_branch(branch)

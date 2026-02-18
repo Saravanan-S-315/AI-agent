@@ -23,10 +23,14 @@ class GitWorkflow:
             subprocess.run(["git", "checkout", "-b", branch], cwd=self.repo_root, check=True)
         return branch
 
-    def commit_project(self, project_name: str) -> None:
+    def commit_project(self, project_name: str) -> bool:
         message = f"feat: add {project_name} with tests and documentation"
         subprocess.run(["git", "add", "-A"], cwd=self.repo_root, check=True)
+        staged = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=self.repo_root)
+        if staged.returncode == 0:
+            return False
         subprocess.run(["git", "commit", "-m", message], cwd=self.repo_root, check=True)
+        return True
 
     def push_branch(self, branch: str, remote: str = "origin") -> None:
         subprocess.run(["git", "push", "-u", remote, branch], cwd=self.repo_root, check=True)
