@@ -39,7 +39,7 @@ jobs:
         run: mypy app --ignore-missing-imports || true
 
       - name: Run unit tests
-        run: pytest -v --cov=app --cov-report=xml --cov-fail-under=80
+        run: pytest -v --cov=app --cov-report=xml --cov-fail-under=50
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3

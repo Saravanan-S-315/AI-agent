@@ -80,6 +80,7 @@ For LLM planning in `prompt` and `cli` modes:
 ## Unattended GitHub Contributions
 
 The repository includes `.github/workflows/autodev.yml` to run the agent every 6 hours and on manual dispatch.
+It also includes `.github/workflows/auto-merge.yml` to enable GitHub auto-merge for `feature/*` pull requests targeting `main`.
 
 Required repository secrets:
 
@@ -91,6 +92,7 @@ Recommended branch protection on `main`:
 - Require pull requests before merge
 - Require status checks to pass
 - Restrict direct pushes
+- Enable auto-merge in repository settings
 
 The workflow runs:
 
