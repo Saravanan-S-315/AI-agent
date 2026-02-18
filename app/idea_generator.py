@@ -18,7 +18,7 @@ class IdeaGenerator:
         ProjectCategory.AI: ["prompt-regression-checker", "doc-qna-indexer", "smart-refactor-helper"],
     }
 
-    def __init__(self, seed: int = 7) -> None:
+    def __init__(self, seed: int | None = None) -> None:
         self._rng = Random(seed)
 
     def generate(
